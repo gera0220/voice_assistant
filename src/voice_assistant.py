@@ -15,12 +15,12 @@ from keras.models import load_model
 voice_detection = load_model('models/voice_detection.h5')
 ss = joblib.load('scaler.save')
 
-""" if __name__ == "__main__":
+if __name__ == "__main__":
     sys = funciones.detectar_sistema()
     funciones.propiedades_voz(sys)
     #funciones.username()
     while True:
-        query, _ = funciones.takeCommand()
+        query, persona = funciones.takeCommand()
         query = query.lower()
         if 'buscar en wikipedia' in query:
             funciones.speak('¿Qué quieres buscar?...')
@@ -53,10 +53,12 @@ ss = joblib.load('scaler.save')
         elif "abrir powerpoint" in query:
             funciones.presentacion_powerpoint()
         elif "abrir word" in query:
-            funciones.word() """
+            funciones.word() 
+        elif "hola" in query:
+            funciones.saludo(persona)
 
 
-import sqlite3
+""" import sqlite3
 
 db = sqlite3.connect('db/test.db')
 cur = db.cursor()
@@ -67,6 +69,6 @@ if __name__ == '__main__':
     sql = "SELECT nombre FROM personas WHERE id_persona = ?"
     cur.execute(sql, [persona])
     nombre = cur.fetchall()
-    print(nombre[0][0])
+    print(nombre[0][0]) """
  
 

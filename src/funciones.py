@@ -209,3 +209,9 @@ def word():
     speak("Abriendo word")
     dragon = "C:/ProgramData/Microsoft/Windows/Start Menu/Programs/Word.lnk"
     os.startfile(dragon)
+
+def saludo(persona):
+    sql = "SELECT nombre FROM personas WHERE id_persona = ?"
+    cur.execute(sql, [persona])
+    nombre = cur.fetchall()
+    speak(f"Hola, {nombre[0][0]}. ¿Qué puedo hacer por ti?")
