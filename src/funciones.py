@@ -133,17 +133,17 @@ def takeAudio():
 
 def takeCommand():
     r = sr.Recognizer()
-    audio = takeAudio()
-    persona = reconocer_persona(audio)
-    try:
-        print("Reconociendo...")    
-        query = r.recognize_google(audio, language='es-MX')
-        print(f"Usted dijo: {query}\n")
-        return query, persona
-    except Exception as e:
-        print("No entendí, ¿podrías repetirlo?...")
-        #return "no funciona"
-        pass
+    while True:
+        try:
+            audio = takeAudio()
+            persona = reconocer_persona(audio)
+            print("Reconociendo...")    
+            query = r.recognize_google(audio, language='es-MX')
+            print(f"Usted dijo: {query}\n")
+            return query, persona
+        except:
+            print("No entendí, ¿podrías repetirlo?...")
+            continue
 
 def asociar_id(pos):
     sql = "SELECT id_persona FROM personas"
