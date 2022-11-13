@@ -78,7 +78,7 @@ def actualizar_navegador(persona):
     speak('¿Cuál es tu navegador?')
     print("""
     ¿Cuál es tu navegador?
-    1. Firefox
+    1. Brave
     2. Chrome
     """)
     option = int(input('Elige tu opción: '))
@@ -87,7 +87,7 @@ def actualizar_navegador(persona):
     elif option == 2:
         navegador = 'chrome'
     sql = """
-        UPDATE personass
+        UPDATE personas
         SET navegador = ?
         WHERE id_persona = ?;
     """
@@ -159,13 +159,15 @@ def speak(audio):
 def abrir_youtube(sys, persona):
     sql = "SELECT navegador FROM personas WHERE id_persona = ?"
     cur.execute(sql, [persona])
-    navegador = np.concatenate(cur.fetchall())[0][0]
+    navegador = np.concatenate(cur.fetchall())[0]
+    print("entredo")
+    print(navegador)
     if(navegador == 'chrome'):
         if(sys == 'Windows'):
             path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
         elif(sys == 'Linux'):
             path = '/usr/bin/chrome %s'
-    elif(navegador == 'brave'):
+    elif(navegador == 'firefox'):
         if(sys == 'Windows'):
             path = 'C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe %s'
         elif(sys == 'Linux'):
