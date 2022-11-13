@@ -71,7 +71,7 @@ def actualizar_genero(persona):
         SET genero = ?
         WHERE id_persona = ?;
     """
-    cur.execute(sql, genero, [persona])
+    cur.execute(sql, (genero, persona))
     db.commit()
 
 def actualizar_navegador(persona):
@@ -91,7 +91,7 @@ def actualizar_navegador(persona):
         SET navegador = ?
         WHERE id_persona = ?;
     """
-    cur.execute(sql, [navegador], [persona])
+    cur.execute(sql, (navegador, persona))
     db.commit()
 
 def actualizar_correo(persona):
@@ -102,7 +102,7 @@ def actualizar_correo(persona):
         SET correo = (?)
         WHERE id_persona = ?;
     """
-    cur.execute(sql, [correo], [persona])
+    cur.execute(sql, (correo, persona))
     db.commit()
 
 def detectar_sistema():
