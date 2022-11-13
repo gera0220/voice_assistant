@@ -30,7 +30,7 @@ if __name__ == "__main__":
         elif 'abrir youtube' in query:
             funciones.abrir_youtube(sys)
         elif 'actualizar datos' in query:
-            funciones.actualizar_datos() 
+            funciones.actualizar_datos(persona) 
         elif "abrir google" in query:
             funciones.abrir_google(sys)
         elif 'chiste' in query:
