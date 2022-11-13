@@ -42,7 +42,7 @@ if __name__ == "__main__":
         elif 'qué hora es' in query:
             strTime = datetime.now().strftime("%H:%M:%S")
             funciones.speak(f"La hora es: {strTime}")
-        elif 'muérete' in query:
+        elif 'muérete' or "cerrar" in query:
             funciones.speak("Ha sido un verdadero placer")
             print("Ha sido un verdadero placer")
             exit()
