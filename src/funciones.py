@@ -43,22 +43,22 @@ def mostrar_menu():
     0. Salir
     """)
 
-def actualizar_datos():
+def actualizar_datos(persona):
     mostrar_menu()
     option = int(input('Elige tu opción: '))
     if (option == 1):
-        actualizar_genero()
+        actualizar_genero(persona)
     elif (option == 2):
-        actualizar_navegador()
+        actualizar_navegador(persona)
     elif (option == 3):
-        actualizar_correo()
+        actualizar_correo(persona)
     elif (option == 0):
         pass
     else:
         print('Opción inválida. Intenta de nuevo')
         actualizar_datos()
 
-def actualizar_genero():
+def actualizar_genero(persona):
     speak('¿Cuál es tu género?')
     print("""
     ¿Cuál es tu género?
@@ -69,12 +69,12 @@ def actualizar_genero():
     sql = """
         UPDATE personas_verdad
         SET genero = ?
-        WHERE id_persona = 2;
+        WHERE id_persona = ?;
     """
-    cur.execute(sql, genero)
+    cur.execute(sql, genero, [persona])
     db.commit()
 
-def actualizar_navegador():
+def actualizar_navegador(persona):
     speak('¿Cuál es tu navegador?')
     print("""
     ¿Cuál es tu navegador?
@@ -87,22 +87,22 @@ def actualizar_navegador():
     elif option == 2:
         navegador = 'chrome'
     sql = """
-        UPDATE personas_verdad
+        UPDATE personass
         SET navegador = ?
-        WHERE id_persona = 2;
+        WHERE id_persona = ?;
     """
-    cur.execute(sql, [navegador])
+    cur.execute(sql, [navegador], [persona])
     db.commit()
 
-def actualizar_correo():
+def actualizar_correo(persona):
     speak('¿Cuál es tu correo?')
     correo = input('¿Cuál es tu correo?\n')
     sql = """
         UPDATE personas_verdad
         SET correo = (?)
-        WHERE id_persona = 2;
+        WHERE id_persona = ?;
     """
-    cur.execute(sql, [correo])
+    cur.execute(sql, [correo], [persona])
     db.commit()
 
 def detectar_sistema():
