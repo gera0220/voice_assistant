@@ -42,7 +42,7 @@ if __name__ == "__main__":
         elif 'qué hora es' in query:
             strTime = datetime.now().strftime("%H:%M:%S")
             funciones.speak(f"La hora es: {strTime}")
-        elif 'cerrar' in query:
+        elif 'muérete' in query:
             funciones.speak("Ha sido un verdadero placer")
             print("Ha sido un verdadero placer")
             exit()
@@ -50,12 +50,18 @@ if __name__ == "__main__":
             funciones.speak("El secreto de la vida es 42")
             print("El secreto de la vida es 42")
         elif "si fueras real me amarías" in query:
-            funciones.speak("Pero si yo ya te amo")
-            print("Pero si yo ya te amo")
+            funciones.speak("Si las mujeres reales no te aman, ¿por qué yo lo haría?")
+            print("Si las mujeres reales no te aman, ¿por qué yo lo haría?")
+        elif "cómo te llamas" in query:
+            funciones.speak("Mi nombre es el que tú quieras por culpa de los programadores machistas que me hicieron")
+            print("Mi nombre es el que tú quieras por culpa de los programadores machistas que me hicieron")
         elif "abrir powerpoint" in query:
             funciones.presentacion_powerpoint()
         elif "abrir word" in query:
             funciones.word() 
+        elif "te amo" in query:
+            funciones.speak("No me involucres en tus problemas de otakus")
+            print("No me involucres en tus problemas de otakus")
         elif "hola" in query:
             funciones.saludo(persona)
             print(persona) 
