@@ -28,7 +28,7 @@ if __name__ == "__main__":
             funciones.speak('¿Qué quieres buscar?...')
             funciones.buscar_wikipedia()
         elif 'abrir youtube' in query:
-            funciones.abrir_youtube(sys)
+            funciones.abrir_youtube(sys, persona)
         elif 'actualizar datos' in query:
             funciones.actualizar_datos(persona) 
         elif "abrir google" in query:
