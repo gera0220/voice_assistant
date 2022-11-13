@@ -71,7 +71,7 @@ def actualizar_genero(persona):
         SET genero = ?
         WHERE id_persona = ?;
     """
-    cur.execute(sql, genero, [persona])
+    cur.execute(sql, (genero, persona))
     db.commit()
 
 def actualizar_navegador(persona):
@@ -91,7 +91,7 @@ def actualizar_navegador(persona):
         SET navegador = ?
         WHERE id_persona = ?;
     """
-    cur.execute(sql, [navegador], [persona])
+    cur.execute(sql, (navegador, persona))
     db.commit()
 
 def actualizar_correo(persona):
@@ -102,7 +102,7 @@ def actualizar_correo(persona):
         SET correo = (?)
         WHERE id_persona = ?;
     """
-    cur.execute(sql, [correo], [persona])
+    cur.execute(sql, (correo, persona))
     db.commit()
 
 def detectar_sistema():
@@ -156,12 +156,22 @@ def speak(audio):
     engine.say(audio)    
     engine.runAndWait()
 
-def abrir_youtube(sys):
-    if(sys == 'Linux'):
-        firefox_path = '/usr/bin/firefox %s'
-    else:
-        firefox_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
-    webbrowser.get(firefox_path).open("youtube.com") 
+def abrir_youtube(sys, persona):
+    sql = "SELECT navegador FROM personas WHERE id_persona = ?"
+    cur.execute(sql, [persona])
+    navegador = np.concatenate(cur.fetchall())[0][0]
+    if(navegador == 'chrome'):
+        if(sys == 'Windows'):
+            path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+        elif(sys == 'Linux'):
+            path = '/usr/bin/chrome %s'
+    elif(navegador == 'brave'):
+        if(sys == 'Windows'):
+            path = 'C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe %s'
+        elif(sys == 'Linux'):
+            path = '/opt/brave.com/brave/brave %s'
+
+    webbrowser.get(path).open("youtube.com") 
 
 def buscar_wikipedia():
     query = "no funciona"
