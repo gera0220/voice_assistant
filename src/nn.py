@@ -32,7 +32,7 @@ lb = LabelEncoder()
 y = to_categorical(lb.fit_transform(y))
 
 X_train, X_rem, y_train, y_rem = train_test_split(X, y, train_size=0.8, stratify = y)
-X_val, X_test, y_val, y_test = train_test_split(X_rem,y_rem, test_size=0.5)
+X_val, X_test, y_val, y_test = train_test_split(X_rem, y_rem, test_size=0.5, stratify = y_rem)
 
 print(X_train.shape), print(y_train.shape)
 print(X_val.shape), print(y_val.shape)
@@ -54,7 +54,7 @@ model.add(Dense(128, activation = 'relu'))
 model.add(Dropout(0.25))  
 
 model.add(Dense(128, activation = 'relu'))
-model.add(Dropout(0.5))    
+model.add(Dropout(0.5))
 
 model.add(Dense(y.shape[1], activation = 'softmax'))
 
@@ -62,7 +62,7 @@ model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='
 
 early_stop = EarlyStopping(monitor='val_loss', min_delta=0, patience=100, verbose=1, mode='auto')
 
-history = model.fit(X_train, y_train, batch_size=256, epochs=30, 
+history = model.fit(X_train, y_train, batch_size=256, epochs=50, 
                     validation_data=(X_val, y_val),
                     callbacks=[early_stop])
 
@@ -92,3 +92,6 @@ accuracy_score(y_test, preds)
 
 # Save model
 model.save('models/voice_detection.h5')
+
+from sklearn.metrics import multilabel_confusion_matrix
+multilabel_confusion_matrix(y_test, preds)

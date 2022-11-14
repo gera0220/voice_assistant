@@ -160,7 +160,6 @@ def abrir_youtube(sys, persona):
     sql = "SELECT navegador FROM personas WHERE id_persona = ?"
     cur.execute(sql, [persona])
     navegador = np.concatenate(cur.fetchall())[0]
-    print("entredo")
     print(navegador)
     if(navegador == 'chrome'):
         if(sys == 'Windows'):
@@ -179,7 +178,8 @@ def buscar_wikipedia():
     query = "no funciona"
     while query == 'no funciona':
         print('entre')
-        query, _ = takeCommand().lower()
+        query, _ = takeCommand()
+        #query, _ = takeCommand().lower()
         if query != 'no funciona':
             break
     try:

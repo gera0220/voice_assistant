@@ -52,4 +52,4 @@
     correo CHAR(50)
 );  */
 
-DELETE FROM personas
+DELETE FROM audio_features
