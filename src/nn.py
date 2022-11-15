@@ -48,21 +48,30 @@ joblib.dump(ss, 'scaler.save')
 model = Sequential()
 
 model.add(Dense(X.shape[1], input_shape=(X.shape[1],), activation = 'relu'))
-model.add(Dropout(0.1))
+model.add(Dropout(0.15)) 
+
+model.add(Dense(1024, activation = 'relu'))
+model.add(Dropout(0.2))  
+
+model.add(Dense(512, activation = 'relu'))
+model.add(Dropout(0.3))  
+
+model.add(Dense(256, activation = 'relu'))
+model.add(Dropout(0.3))  
 
 model.add(Dense(128, activation = 'relu'))
-model.add(Dropout(0.25))  
+model.add(Dropout(0.4))
 
-model.add(Dense(128, activation = 'relu'))
+model.add(Dense(64, activation = 'relu'))
 model.add(Dropout(0.5))
 
 model.add(Dense(y.shape[1], activation = 'softmax'))
 
-model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
+model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='nadam')
 
-early_stop = EarlyStopping(monitor='val_loss', min_delta=0, patience=100, verbose=1, mode='auto')
+early_stop = EarlyStopping(monitor='val_loss', min_delta=0, patience=40, verbose=1, mode='auto')
 
-history = model.fit(X_train, y_train, batch_size=256, epochs=50, 
+history = model.fit(X_train, y_train, batch_size=512, epochs=40, 
                     validation_data=(X_val, y_val),
                     callbacks=[early_stop])
 
