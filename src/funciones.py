@@ -39,7 +39,6 @@ def mostrar_menu():
     1. Género
     2. Navegador
     3. Correo
-    4. Idioma
     0. Salir
     """)
 
@@ -67,7 +66,7 @@ def actualizar_genero(persona):
     """)
     genero = input('Elige tu opción: ')
     sql = """
-        UPDATE personas_verdad
+        UPDATE personas
         SET genero = ?
         WHERE id_persona = ?;
     """
@@ -98,7 +97,7 @@ def actualizar_correo(persona):
     speak('¿Cuál es tu correo?')
     correo = input('¿Cuál es tu correo?\n')
     sql = """
-        UPDATE personas_verdad
+        UPDATE personas
         SET correo = (?)
         WHERE id_persona = ?;
     """
