@@ -11,6 +11,7 @@ from sklearn.metrics import accuracy_score
 import sqlite3
 import pandas as pd
 import joblib
+import pickle
 
 # Cargar datos
 db = sqlite3.connect("db/test.db")
@@ -43,7 +44,7 @@ X_train = ss.fit_transform(X_train)
 X_val = ss.transform(X_val)
 X_test = ss.transform(X_test)
 
-joblib.dump(ss, 'scaler.save')
+pickle.dump(ss, open('scaler.pkl','wb'))
 
 model = Sequential()
 
