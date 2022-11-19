@@ -2,14 +2,11 @@ import sys
 sys.path.insert(0, 'src/funciones.py')
 import funciones
 import os
-import joblib
 import pickle
 import warnings
 import pyjokes
 import ecapture as ec
 from datetime import datetime
-import librosa
-import numpy as np
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' #Se deshace de warnings por no usar CUDA
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -38,9 +35,7 @@ def comandos(persona, query):
             strTime = datetime.now().strftime("%H:%M:%S")
             funciones.speak(f"La hora es: {strTime}")
     elif 'cerrar' in query:
-            funciones.speak("Ha sido un verdadero placer")
-            print("Ha sido un verdadero placer")
-            exit()
+            funciones.cerrar()
     elif "cuál es el secreto de la vida" in query:
             funciones.speak("El secreto de la vida es 42")
             print("El secreto de la vida es 42")
@@ -70,10 +65,10 @@ def comandos(persona, query):
 def main():
     sys = funciones.detectar_sistema()
     funciones.propiedades_voz(sys)
-    funciones.username()
-    #while True:
-    #    query, persona = funciones.takeCommand()
-    #    query = query.lower()
-    #    if "merli" in query:
-    #        comandos(persona, query)
-    print(sys)
+    #funciones.username()
+    while True:
+        query, persona = funciones.takeCommand()
+        query = query.lower()
+        if "merli" in query:
+            comandos(persona, query)
+    #print(sys)
