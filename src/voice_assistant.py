@@ -17,7 +17,17 @@ from keras.models import load_model
 voice_detection = load_model('models/voice_detection.h5')
 ss = joblib.load('scaler.save')
 
-def comandos():
+def iniciar():
+    sys = funciones.detectar_sistema()
+    funciones.propiedades_voz(sys)
+    #funciones.username()
+    while True:
+        query, persona = funciones.takeCommand()
+        query = query.lower()
+        if "merli" in query:
+            comandos(persona, query) 
+
+def comandos(persona, query):
     if 'buscar en wikipedia' in query:
             funciones.speak('¿Qué quieres buscar?...')
             funciones.buscar_wikipedia()
@@ -66,7 +76,7 @@ def comandos():
             funciones.saludo(persona)
             print(persona) 
 
-if __name__ == "__main__":
+""" if __name__ == "__main__":
     sys = funciones.detectar_sistema()
     funciones.propiedades_voz(sys)
     #funciones.username()
@@ -74,8 +84,7 @@ if __name__ == "__main__":
         query, persona = funciones.takeCommand()
         query = query.lower()
         if "merli" in query:
-            comandos()
-
+            comandos() """
 
 """ import sqlite3
 
@@ -105,4 +114,5 @@ id = funciones.asociar_id(pos)
 print(pos)
 print(id) """
     
- 
+if __name__ == "__main__":
+   iniciar()
