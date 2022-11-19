@@ -7,8 +7,8 @@ import platform
 import os
 import librosa
 import numpy as np
-import joblib
 import warnings
+import pickle
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3' #Se deshace de warnings por no usar CUDA
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -16,7 +16,8 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 from keras.models import load_model
 voice_detection = load_model('models/voice_detection.h5')
 
-ss = joblib.load('scaler.save')
+#ss = joblib.load('scaler.save')
+ss = pickle.load(open('scaler.pkl','rb'))
 
 wikipedia.set_lang('es')
 db = sqlite3.connect('db/test.db')
@@ -152,6 +153,8 @@ def asociar_id(pos):
     return ids[pos]
 
 def speak(audio):
+    sys = detectar_sistema()
+    propiedades_voz(sys)
     engine.say(audio)    
     engine.runAndWait()
 
@@ -226,3 +229,8 @@ def saludo(persona):
     cur.execute(sql, [persona])
     nombre = cur.fetchall()
     speak(f"Hola, {nombre[0][0]}. ¿Qué puedo hacer por ti?")
+
+def cerrar():
+    speak("Hasta luego")
+    print("Hasta luego")
+    exit()
