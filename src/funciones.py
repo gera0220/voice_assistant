@@ -7,7 +7,6 @@ import platform
 import os
 import librosa
 import numpy as np
-import joblib
 import warnings
 import pickle
 
@@ -154,6 +153,8 @@ def asociar_id(pos):
     return ids[pos]
 
 def speak(audio):
+    sys = detectar_sistema()
+    propiedades_voz(sys)
     engine.say(audio)    
     engine.runAndWait()
 
@@ -228,3 +229,8 @@ def saludo(persona):
     cur.execute(sql, [persona])
     nombre = cur.fetchall()
     speak(f"Hola, {nombre[0][0]}. ¿Qué puedo hacer por ti?")
+
+def cerrar():
+    speak("Hasta luego")
+    print("Hasta luego")
+    exit()
