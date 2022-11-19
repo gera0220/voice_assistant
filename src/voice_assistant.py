@@ -31,7 +31,7 @@ ss = joblib.load('scaler.save')
             funciones.actualizar_datos() 
         elif "abrir google" in query:
             funciones.abrir_google(sys)
-        elif 'chiste' in query:
+        elif 'dime un chiste' in query:
             funciones.speak(pyjokes.get_joke(language="es", category="all"))
         elif "tomar foto" in query:
             ec.capture(0, "Our Camera ", "Mi_Foto.jpg")
