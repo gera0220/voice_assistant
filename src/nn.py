@@ -43,7 +43,7 @@ X_train = ss.fit_transform(X_train)
 X_val = ss.transform(X_val)
 X_test = ss.transform(X_test)
 
-pickle.dump(ss, open('scaler.pkl','wb'))
+#pickle.dump(ss, open('scaler.pkl','wb'))
 
 model = Sequential()
 
@@ -100,7 +100,7 @@ preds = np.around(preds)
 accuracy_score(y_test, preds)
 
 # Save model
-model.save('models/voice_detection.h5')
+#model.save('models/voice_detection.h5')
 
 from sklearn.metrics import multilabel_confusion_matrix
 multilabel_confusion_matrix(y_test, preds)
