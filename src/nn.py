@@ -88,7 +88,7 @@ plt.plot(val_accuracy, label='Validation Accuracy', color='orange')
 # Set title
 plt.title('Training and Validation Accuracy by Epoch', fontsize = 25)
 plt.xlabel('Epoch', fontsize = 18)
-plt.ylabel('Categorical Crossentropy', fontsize = 18)
+plt.ylabel('Accuracy', fontsize = 18)
 plt.xticks(range(0,20,1), range(0,20,1))
 
 plt.legend(fontsize = 18)
