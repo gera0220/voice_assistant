@@ -17,7 +17,7 @@ from keras.models import load_model
 voice_detection = load_model('models/voice_detection.h5')
 ss = joblib.load('scaler.save')
 
-def iniciar():
+def iniciar(sys):
     sys = funciones.detectar_sistema()
     funciones.propiedades_voz(sys)
     #funciones.username()
@@ -25,9 +25,9 @@ def iniciar():
         query, persona = funciones.takeCommand()
         query = query.lower()
         if "merli" in query:
-            comandos(persona, query) 
+            comandos(persona, query, sys) 
 
-def comandos(persona, query):
+def comandos(persona, query, sys):
     if 'buscar en wikipedia' in query:
             funciones.speak('¿Qué quieres buscar?...')
             funciones.buscar_wikipedia()
@@ -115,4 +115,4 @@ print(pos)
 print(id) """
     
 if __name__ == "__main__":
-   iniciar()
+   iniciar(sys)
