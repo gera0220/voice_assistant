@@ -203,6 +203,22 @@ def abrir_google(sys):
     else:
         firefox_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
     webbrowser.get(firefox_path).open("google.com") 
+
+def escoger_navegador(sys, persona):
+    sql = "SELECT navegador FROM personas WHERE id_persona = ?"
+    cur.execute(sql, [persona])
+    navegador = np.concatenate(cur.fetchall())[0]
+    if(navegador == 'chrome'):
+        if(sys == 'Windows'):
+            path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s'
+        elif(sys == 'Linux'):
+            path = '/usr/bin/chrome %s'
+    elif(navegador == 'firefox'):
+        if(sys == 'Windows'):
+            path = 'C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe %s'
+        elif(sys == 'Linux'):
+            path = '/opt/brave.com/brave/brave %s'
+    return path
  
 def username():
     speak("¿Cómo debería llamarlo, amo?")
@@ -234,3 +250,20 @@ def cerrar():
     speak("Hasta luego")
     print("Hasta luego")
     exit()
+
+def buscar_google(sys, persona, query):
+    navegador = escoger_navegador(sys, persona)
+    busqueda = query.split('buscar en google')[1].strip()
+    busqueda = busqueda.replace(' ', '+')
+    inicio_query = 'https://www.google.com.mx/search?q='
+    fin_query = '&sxsrf=ALiCzsZSt-X-AO10qXhkzqZTYSrIs0t0gw%3A1669048002064&source=hp&ei=wqZ7Y8-vAdDXkPIPrKunmAM&iflsig=AJiK0e8AAAAAY3u00mW7Ih0aYxo8WEk6Tb6-9-5NRTIK&ved=0ahUKEwjPmJiq2L_7AhXQK0QIHazVCTMQ4dUDCAk&uact=5&oq=elefantes+morados&gs_lcp=Cgdnd3Mtd2l6EAMyCAgAEIAEEMsBMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeMgYIABAWEB4yBggAEBYQHjIGCAAQFhAeOgcIIxDqAhAnOgQIIxAnOgUIABCRAjoLCC4QgAQQxwEQ0QM6BQgAEIAEOgUILhCABDoGCCMQJxATOgQIABBDOgcILhDUAhBDOgQILhBDOggILhCABBDUAjoICC4Q1AIQgAQ6CwguEIAEENQCEMsBOgsILhDUAhCABBDLAToICC4QgAQQywE6BggAEB4QDToICAAQFhAeEA86CAgAEBYQHhAKUM8HWPQgYN0haANwAHgBgAG1AYgB1BGSAQQwLjE4mAEAoAEBsAEK&sclient=gws-wiz'
+    query_final = inicio_query + busqueda + fin_query
+    webbrowser.get(navegador).open(query_final)
+
+def buscar_youtube(sys, persona, query):
+    navegador = escoger_navegador(sys, persona)
+    busqueda = query.split('buscar en youtube')[1].strip()
+    busqueda = busqueda.replace(' ', '+')
+    inicio_query = 'https://www.youtube.com/results?search_query='
+    query_final = inicio_query + busqueda
+    webbrowser.get(navegador).open(query_final)
