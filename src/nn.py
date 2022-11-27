@@ -82,14 +82,14 @@ val_accuracy = history.history['val_accuracy']
 plt.figure(figsize=(12, 8))
 
 # Generate line plot of training, testing loss over epochs.
-plt.plot(train_accuracy, label='Training Accuracy', color='#185fad')
-plt.plot(val_accuracy, label='Validation Accuracy', color='orange')
+plt.plot(train_accuracy, label='Conjunto de entrenamiento', color='#185fad')
+plt.plot(val_accuracy, label='Conjunto de validación', color='orange')
 
 # Set title
-plt.title('Training and Validation Accuracy by Epoch', fontsize = 25)
-plt.xlabel('Epoch', fontsize = 18)
-plt.ylabel('Accuracy', fontsize = 18)
-plt.xticks(range(0,20,1), range(0,20,1))
+plt.title('Precisión de entrenamiento y validación por época', fontsize = 25)
+plt.xlabel('Época', fontsize = 18)
+plt.ylabel('Precisión', fontsize = 18)
+plt.xticks(range(0,41,5), range(0,41,5))
 
 plt.legend(fontsize = 18)
 plt.show()
