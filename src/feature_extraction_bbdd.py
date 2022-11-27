@@ -2,14 +2,17 @@ import os
 import pandas as pd
 import librosa
 import numpy as np
-import uuid
 import sqlite3
 import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
+# Conexión a la base de datos
+db = sqlite3.connect("db/test.db")
+cur = db.cursor()
+
 # Cambio de directorio
-os.chdir('data/raw/chunked')
+os.chdir('chunked')
 
 # Guardar lista de audios
 audio_files = os.listdir()
@@ -29,9 +32,6 @@ def extract_features(files):
 
     # Genera los coeficientes de mel a partir de la serie de tiempo
     mfccs = librosa.feature.mfcc(X, n_mfcc=40).T
-
-    print(mfccs.shape)
-
     return mfccs
 
 # Obtención de features y conversión a array
@@ -52,8 +52,8 @@ n_speakers = len(speakers_names)
 
 # Creación de claves únicas
 n_id = []
-for _ in range(n_speakers):
-    n_id.append(str(uuid.uuid4()))
+for i in range(n_speakers):
+    n_id.append(speakers_names[i])
 
 keys = dict(zip(list(speakers_names), n_id))
 all_keys = np.array([keys[str(ele[0])] for ele in speaker_rep])
@@ -68,9 +68,6 @@ features_label = np.concatenate(features_label)
 
 features = np.concatenate([all_keys.reshape(-1, 1), features_label], axis = 1)
 
-# Conexión a la base de datos
-db = sqlite3.connect("../../../db/test.db")
-cur = db.cursor()
 
 #Inserción de datos
 cur.executemany("""INSERT INTO audio_features VALUES(NULL, ?,

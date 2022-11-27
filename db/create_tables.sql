@@ -51,3 +51,5 @@
     navegador CHAR(20) check (navegador in ('firefox', 'chrome')),
     correo CHAR(50)
 );  */
+
+DELETE FROM audio_features

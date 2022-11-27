@@ -2,7 +2,7 @@ from pydub import AudioSegment
 from pydub.utils import make_chunks
 import os
 
-os.chdir('data/raw')
+#os.chdir('data/raw')
 
 def process_audio(file_name):
     myaudio = AudioSegment.from_file(file_name, "wav") 
